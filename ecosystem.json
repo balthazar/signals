@@ -1,0 +1,23 @@
+{
+  "apps": [{
+
+    "name"  : "Signals",
+    "script": "bin/api.js",
+
+    "env_production": {
+      NODE_ENV: "production"
+    }
+
+  }],
+
+  "deploy": {
+    "production": {
+      "user"       : "me",
+      "host"       : "198.27.65.108",
+      "ref"        : "origin/master",
+      "repo"       : "git@github.com:Apercu/signals.git",
+      "path"       : "/var/www/signals",
+      "post-deploy": "yarn && npm run build && cp index.html dist && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
